@@ -39,6 +39,10 @@ const products = [
     title: 'Arc Shelf',
     price: 299,
     img: 'https://images.pexels.com/photos/6471148/pexels-photo-6471148.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+    desc: 'Arched shelving unit with adjustable panels.'
+  }
+];
+
 const productGrid = document.getElementById('productGrid');
 const cartCountEl = document.getElementById('cartCount');
 const modal = document.getElementById('productModal');

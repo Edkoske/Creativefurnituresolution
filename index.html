@@ -1,121 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Creative Furniture Solutions offers design-forward, sustainably crafted furniture collections for modern homes. Shop premium pieces with care." />
-    <meta name="keywords" content="furniture, modern furniture, sustainable design, home decor, Creative Furniture" />
-    <title>Creative Furniture Solutions — Premium Modern Furniture</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <a href="#maincontent" class="skip-link">Skip to main content</a>
-    <header class="site-header" role="banner">
-      <div class="container header-grid">
-        <a class="brand" href="#">Creative<span>Furniture</span></a>
-        <nav class="nav" aria-label="Main navigation">
-          <a href="#products">Products</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </nav>
-
-        <div class="actions">
-          <button id="cartBtn" class="cart-btn" aria-label="View cart">Cart <span id="cartCount">0</span></button>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="container hero-grid">
-          <div class="hero-content">
-            <h1>Design-forward furniture for beautiful spaces</h1>
-            <p>Meticulously crafted, sustainably sourced pieces that transform homes and inspire creativity.</p>
-            <div class="hero-cta">
-              <a class="btn primary" href="#products">Shop Collections</a>
-              <a class="btn ghost" href="#about">Our Story</a>
-            </div>
-          </div>
-          <div class="hero-image">
-            <img loading="lazy" src="https://images.pexels.com/photos/210617/pexels-photo-210617.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Contemporary furnished living area" />
-          </div>
-        </div>
-      </section>
-
-      <section id="products" class="container section products">
-        <header class="section-header">
-          <h2>Featured Collections</h2>
-          <p>Curated furniture pieces designed for comfort and style.</p>
-        </header>
-
-        <div id="productGrid" class="product-grid">
-          <!-- Products populated by script.js -->
-        </div>
-      </section>
-
-      <section id="about" class="container section about">
-        <div class="about-grid">
-          <div>
-            <h3>Craft & Sustainability</h3>
-            <p>We partner with local artisans and source responsibly. Each piece is built to last — with materials chosen for longevity and minimal environmental impact.</p>
-          </div>
-          <div>
-            <h3>Design Philosophy</h3>
-            <p>Function meets refined aesthetics. Our pieces blend modern lines with classic comfort, creating versatile staples for any home.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="container section testimonials">
-        <header class="section-header">
-          <h2>What Clients Say</h2>
-        </header>
-        <div class="test-grid">
-          <blockquote>
-            "Exceptional quality and thoughtful design — our living room has never looked better."
-            <cite>— Sarah M.</cite>
-          </blockquote>
-          <blockquote>
-            "Customer service was excellent and delivery was on time. The sofa is exceptionally comfortable."
-            <cite>— James K.</cite>
-          </blockquote>
-        </div>
-      </section>
-
-      <section id="contact" class="container section contact">
-        <div class="contact-grid">
-          <div>
-            <h3>Stay Updated</h3>
-            <p>Sign up for product announcements and studio events.</p>
-            <form id="newsletterForm" class="newsletter">
-              <input type="email" id="email" placeholder="your@email.com" required>
-              <button class="btn primary" type="submit">Subscribe</button>
-            </form>
-          </div>
-          <div>
-            <h3>Visit Our Studio</h3>
-            <p>123 Design Street<br/>City, Country<br/>Email: hello@creativefurniture.example</p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>&copy; <span id="year"></span> Creative Furniture Solutions</div>
-        <div class="socials">
-          <a href="#" aria-label="Instagram">Instagram</a> • <a href="#" aria-label="Pinterest">Pinterest</a> • <a href="#" aria-label="LinkedIn">LinkedIn</a>
-        </div>
-      </div>
-      <p class="photo-credit">Images courtesy of <a href="https://www.pexels.com" target="_blank" rel="noopener">Pexels</a></p>
-        <button class="modal-close" id="modalClose">×</button>
-        <div id="modalContent"></div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creative Furniture Solutions</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-grid">
+      <a href="#" class="brand">Creative <span>Furniture</span></a>
+      <nav class="nav">
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="actions">
+        <button class="cart-btn" aria-label="Cart"><span id="cartCount">0</span></button>
       </div>
     </div>
+  </header>
 
-    <script src="script.js" defer></script>
-  </body>
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <h1>Premium furniture for modern living</h1>
+          <p>Explore our curated selection of handcrafted pieces that bring comfort and style to any space.</p>
+          <a href="#products" class="btn primary hero-cta">Shop Now</a>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1598300050231-57c0f6be4cc5?auto=format&fit=crop&w=800&q=80" alt="Stylish furniture">
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="section">
+      <div class="container">
+        <header class="section-header"><h2>Featured Products</h2></header>
+        <div id="productGrid" class="product-grid"></div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container about-grid">
+        <div>
+          <h2>About Us</h2>
+          <p>Creative Furniture Solutions is dedicated to bringing you sustainable, high-quality furniture crafted by skilled artisans.</p>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1583803791058-80e99ebb1957?auto=format&fit=crop&w=600&q=80" alt="Workshop">
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact-grid">
+        <div>
+          <h2>Stay in Touch</h2>
+          <form id="newsletterForm">
+            <div class="newsletter">
+              <input type="email" id="email" placeholder="Email address" required>
+              <button class="btn primary" type="submit">Subscribe</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <h2>Contact</h2>
+          <p>1234 Main St<br>Anytown, USA<br><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>&copy; <span id="year"></span> Creative Furniture Solutions</div>
+      <div><a href="#privacy">Privacy Policy</a></div>
+    </div>
+  </footer>
+
+  <div id="productModal" class="modal" aria-hidden="true">
+    <div class="modal-panel" id="modalContent"></div>
+    <button id="modalClose" class="modal-close" aria-label="Close">&times;</button>
+  </div>
+</body>
 </html>
