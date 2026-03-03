@@ -4,37 +4,37 @@ const products = [
   {
     id: 'p1', title: 'Aria Sofa', price: 1499,
     category: 'Sofas', material: 'Leather',
-    img: 'https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg',
+    img: 'https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg',
     desc: 'Elegant three-seater with plush cushions and solid wood frame.'
   },
   {
     id: 'p2', title: 'Oak Minimal Desk', price: 799,
     category: 'Office', material: 'Wood',
-    img: 'https://images.pexels.com/photos/3785822/pexels-photo-3785822.jpeg',
+    img: 'https://images.pexels.com/photos/374023/pexels-photo-374023.jpeg',
     desc: 'Hand-finished oak desk with integrated cable management.'
   },
   {
     id: 'p3', title: 'Luna Armchair', price: 599,
     category: 'Sofas', material: 'Fabric',
-    img: 'https://images.pexels.com/photos/1128949/pexels-photo-1128949.jpeg',
+    img: 'https://images.pexels.com/photos/698528/pexels-photo-698528.jpeg',
     desc: 'Compact armchair with curved back and high-density foam.'
   },
   {
     id: 'p4', title: 'Monroe Dining Table', price: 1699,
     category: 'Dining', material: 'Wood',
-    img: 'https://images.pexels.com/photos/621146/pexels-photo-621146.jpeg',
+    img: 'https://images.pexels.com/photos/298842/pexels-photo-298842.jpeg',
     desc: 'Solid table seating six, finished with water-resistant coating.'
   },
   {
     id: 'p5', title: 'Haven Bed Frame', price: 1299,
     category: 'Beds', material: 'Wood',
-    img: 'https://images.pexels.com/photos/375909/pexels-photo-375909.jpeg',
+    img: 'https://images.pexels.com/photos/7088092/pexels-photo-7088092.jpeg',
     desc: 'Platform bed with upholstered headboard and slatted base.'
   },
   {
     id: 'p6', title: 'Arc Shelf', price: 299,
     category: 'Office', material: 'Metal',
-    img: 'https://images.pexels.com/photos/6471148/pexels-photo-6471148.jpeg',
+    img: 'https://images.pexels.com/photos/569978/pexels-photo-569978.jpeg',
     desc: 'Arched shelving unit with adjustable panels.'
   }
 ];
