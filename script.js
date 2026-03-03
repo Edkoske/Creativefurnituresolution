@@ -1,59 +1,62 @@
+/* global page switching, filtering, cart, modal, newsletter and contact handlers */
+
 const products = [
   {
-    id: 'p1',
-    title: 'Aria Sofa',
-    price: 1499,
-    img: 'https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+    id: 'p1', title: 'Aria Sofa', price: 1499,
+    category: 'Sofas', material: 'Leather',
+    img: 'https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg',
     desc: 'Elegant three-seater with plush cushions and solid wood frame.'
   },
   {
-    id: 'p2',
-    title: 'Oak Minimal Desk',
-    price: 799,
-    img: 'https://images.pexels.com/photos/3785822/pexels-photo-3785822.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+    id: 'p2', title: 'Oak Minimal Desk', price: 799,
+    category: 'Office', material: 'Wood',
+    img: 'https://images.pexels.com/photos/3785822/pexels-photo-3785822.jpeg',
     desc: 'Hand-finished oak desk with integrated cable management.'
   },
   {
-    id: 'p3',
-    title: 'Luna Armchair',
-    price: 599,
-    img: 'https://images.pexels.com/photos/1128949/pexels-photo-1128949.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+    id: 'p3', title: 'Luna Armchair', price: 599,
+    category: 'Sofas', material: 'Fabric',
+    img: 'https://images.pexels.com/photos/1128949/pexels-photo-1128949.jpeg',
     desc: 'Compact armchair with curved back and high-density foam.'
   },
   {
-    id: 'p4',
-    title: 'Monroe Dining Table',
-    price: 1699,
-    img: 'https://images.pexels.com/photos/621146/pexels-photo-621146.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+    id: 'p4', title: 'Monroe Dining Table', price: 1699,
+    category: 'Dining', material: 'Wood',
+    img: 'https://images.pexels.com/photos/621146/pexels-photo-621146.jpeg',
     desc: 'Solid table seating six, finished with water-resistant coating.'
   },
   {
-    id: 'p5',
-    title: 'Haven Bed Frame',
-    price: 1299,
-    img: 'https://images.pexels.com/photos/375909/pexels-photo-375909.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+    id: 'p5', title: 'Haven Bed Frame', price: 1299,
+    category: 'Beds', material: 'Wood',
+    img: 'https://images.pexels.com/photos/375909/pexels-photo-375909.jpeg',
     desc: 'Platform bed with upholstered headboard and slatted base.'
   },
   {
-    id: 'p6',
-    title: 'Arc Shelf',
-    price: 299,
-    img: 'https://images.pexels.com/photos/6471148/pexels-photo-6471148.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+    id: 'p6', title: 'Arc Shelf', price: 299,
+    category: 'Office', material: 'Metal',
+    img: 'https://images.pexels.com/photos/6471148/pexels-photo-6471148.jpeg',
     desc: 'Arched shelving unit with adjustable panels.'
   }
 ];
 
-const productGrid = document.getElementById('productGrid');
-const cartCountEl = document.getElementById('cartCount');
+// element references
+const featuredGrid = document.getElementById('featuredProducts');
+const shopGrid = document.getElementById('shopProducts');
+const cartCountEl = document.getElementById('cartBadge');
 const modal = document.getElementById('productModal');
 const modalContent = document.getElementById('modalContent');
 const modalClose = document.getElementById('modalClose');
 
-function formatPrice(n){return '$' + n.toLocaleString()}
+// simple state
+let filters = {category:'', price:'', material:'', sort:'newest'};
 
-function renderProducts(){
-  productGrid.innerHTML = '';
-  products.forEach(p=>{
+/* utility */
+function formatPrice(n){ return '$' + n.toLocaleString(); }
+
+/* rendering helpers */
+function renderGrid(grid, items){
+  grid.innerHTML = '';
+  items.forEach(p => {
     const card = document.createElement('article');
     card.className = 'product-card';
     card.innerHTML = `
@@ -70,72 +73,190 @@ function renderProducts(){
         </div>
       </div>
     `;
-    productGrid.appendChild(card);
+    grid.appendChild(card);
   });
 }
 
+function renderFeatured(){
+  renderGrid(featuredGrid, products.slice(0,4));
+}
+
+function renderShop(){
+  applyFilters();
+}
+
+/* page switching */
+function showPage(id){
+  ['main-content','shop-page','about-page','contact-page'].forEach(pid=>{
+    const el = document.getElementById(pid);
+    if(!el) return;
+    el.style.display = pid === id ? '' : 'none';
+  });
+}
+function showHome(e){ if(e) e.preventDefault(); showPage('main-content'); }
+function showShop(e){ if(e) e.preventDefault(); showPage('shop-page'); renderShop(); }
+function showAbout(e){ if(e) e.preventDefault(); showPage('about-page'); }
+function showContact(e){ if(e) e.preventDefault(); showPage('contact-page'); }
+
+/* filtering */
+function applyFilters(){
+  let results = products.slice();
+  if(filters.category){
+    results = results.filter(p=>p.category === filters.category);
+  }
+  if(filters.material){
+    results = results.filter(p=>p.material === filters.material);
+  }
+  if(filters.price){
+    const [low,high] = filters.price.split('-').map(Number);
+    results = results.filter(p=>{
+      if(high) return p.price >= low && p.price <= high;
+      return p.price >= low;
+    });
+  }
+  if(filters.sort === 'price-low'){
+    results.sort((a,b)=>a.price-b.price);
+  } else if(filters.sort === 'price-high'){
+    results.sort((a,b)=>b.price-a.price);
+  }
+  renderGrid(shopGrid, results);
+}
+function filterByCategory(cat){
+  filters.category = cat;
+  const sel = document.getElementById('catFilter');
+  if(sel) sel.value = cat;
+  applyFilters();
+  showShop();
+}
+
+/* cart and modal */
 function openModal(html){
   modalContent.innerHTML = html;
   modal.setAttribute('aria-hidden','false');
 }
-
 function closeModal(){
   modal.setAttribute('aria-hidden','true');
   modalContent.innerHTML = '';
 }
-
-function attachListeners(){
-  productGrid.addEventListener('click', e=>{
-    const btn = e.target.closest('button[data-action]');
-    if(!btn) return;
-    const id = btn.dataset.id;
-    const action = btn.dataset.action;
-    const product = products.find(x=>x.id===id);
-    if(action==='details'){
-      openModal(`<div style="display:flex;gap:18px;align-items:flex-start"><img src='${product.img}' style='width:320px;height:auto;border-radius:8px;object-fit:cover' alt='${product.title}'/><div><h3>${product.title}</h3><p>${product.desc}</p><p style='font-weight:700'>${formatPrice(product.price)}</p><button class='btn primary' id='modalAdd' data-id='${product.id}'>Add to cart</button></div></div>`);
-      document.getElementById('modalAdd').addEventListener('click', e=>{ addToCart(product.id); closeModal(); });
-    } else if(action==='add'){
-      addToCart(product.id);
-    }
-  });
-
-  modalClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
-  // close modal with Esc key when open
-  document.addEventListener('keydown', e=>{
-    if(e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false'){
-      closeModal();
-    }
-  });
-
-  document.getElementById('newsletterForm').addEventListener('submit', e=>{
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    alert('Thanks — we will keep you updated: ' + email);
-    e.target.reset();
-  });
+function toggleCart(){
+  const side = document.getElementById('cartSidebar');
+  if(side.getAttribute('aria-hidden') === 'true'){
+    side.setAttribute('aria-hidden','false');
+  } else {
+    side.setAttribute('aria-hidden','true');
+  }
 }
-
 function addToCart(id){
   const key = 'cfs_cart';
   let cart = JSON.parse(localStorage.getItem(key) || '[]');
-  // avoid duplicates – store as counts
   const index = cart.findIndex(x=>x.id===id);
   if(index > -1){ cart[index].qty += 1; }
   else { cart.push({id,qty:1}); }
   localStorage.setItem(key, JSON.stringify(cart));
   cartCountEl.textContent = cart.reduce((sum,i)=>sum+i.qty,0);
 }
-
 function loadCartCount(){
   const key = 'cfs_cart';
   const cart = JSON.parse(localStorage.getItem(key) || '[]');
   cartCountEl.textContent = cart.reduce((sum,i)=>sum+i.qty,0);
 }
 
+/* checkout & notifications */
+function handleCheckout(){
+  showNotification('Checkout functionality is coming soon.', 'info');
+}
+function showNotification(message, type='success'){
+  // simple alert for now
+  alert(message);
+}
+
+/* misc handlers */
+function handleContactForm(e){
+  e.preventDefault();
+  showNotification('Thanks for your message! We will be in touch shortly.');
+  e.target.reset();
+}
+
+function handleNewsletter(e){
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  showNotification('Subscribed with ' + email);
+  e.target.reset();
+}
+
+/* event attachments */
+function toggleNavOnMobile(){
+  const menu = document.getElementById('navMenu');
+  const toggle = document.getElementById('menuToggle');
+  if(menu && window.innerWidth <= 768){
+    menu.classList.remove('active');
+    toggle.setAttribute('aria-expanded','false');
+  }
+}
+
+function attachListeners(){
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  if(menuToggle && navMenu){
+    menuToggle.addEventListener('click', ()=>{
+      const isActive = navMenu.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    });
+  }
+
+  document.body.addEventListener('click', e=>{
+    const btn = e.target.closest('button[data-action]');
+    if(btn){
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      const product = products.find(x=>x.id===id);
+      if(action==='details'){
+        openModal(`
+          <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+            <img src='${product.img}' style='width:100%;max-width:320px;height:auto;border-radius:8px;object-fit:cover' alt='${product.title}'/>
+            <div style='flex:1;min-width:250px'>
+              <h3>${product.title}</h3>
+              <p>${product.desc}</p>
+              <p style='font-weight:700'>${formatPrice(product.price)}</p>
+              <button class='btn primary' id='modalAdd' data-id='${product.id}'>Add to cart</button>
+            </div>
+          </div>
+        `);
+        document.getElementById('modalAdd').addEventListener('click', e=>{ addToCart(product.id); closeModal(); });
+      } else if(action==='add'){
+        addToCart(product.id);
+      }
+    }
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown', e=>{
+    if(e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false'){
+      closeModal();
+    }
+  });
+
+  const newsletterForm = document.getElementById('newsletterForm');
+  if(newsletterForm) newsletterForm.addEventListener('submit', handleNewsletter);
+
+  const contactForm = document.querySelector('#contact-page form');
+  if(contactForm) contactForm.addEventListener('submit', handleContactForm);
+
+  ['catFilter','priceFilter','materialFilter','sortFilter'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('change', e=>{
+      filters[id.replace(/Filter$/,'')] = e.target.value;
+      applyFilters();
+    });
+  });
+}
+
+// initialisation
 document.addEventListener('DOMContentLoaded', ()=>{
-  renderProducts();
-  attachListeners();
+  renderFeatured();
   loadCartCount();
+  attachListeners();
   document.getElementById('year').textContent = new Date().getFullYear();
 });

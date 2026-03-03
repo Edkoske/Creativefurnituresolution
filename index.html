@@ -1,90 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Creative Furniture Solutions</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative Furniture Solutions offers premium modern furniture, custom designs, and fast delivery. Transform your space with quality craftsmanship and contemporary style.">
+  <title>Creative Furniture Solutions – Premium Modern Furniture</title>
+  <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="styles.css">
-  <script defer src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
+  <!-- accessibility shortcut -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
     <div class="container header-grid">
-      <a href="#" class="brand">Creative <span>Furniture</span></a>
-      <nav class="nav">
-        <a href="#products">Products</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+      <a href="#" class="brand" onclick="showHome(event)" aria-label="Creative Furniture Solutions Home">
+        <span>✨</span> CFS
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      <nav class="nav" id="navMenu" aria-label="Primary navigation">
+        <a href="#" onclick="showHome(event);toggleNavOnMobile()">Home</a>
+        <a href="#" onclick="showShop(event);toggleNavOnMobile()">Shop</a>
+        <a href="#" onclick="showAbout(event);toggleNavOnMobile()">About</a>
+        <a href="#" onclick="showContact(event);toggleNavOnMobile()">Contact</a>
       </nav>
       <div class="actions">
-        <button class="cart-btn" aria-label="Cart"><span id="cartCount">0</span></button>
+        <button class="cart-btn" onclick="toggleCart()" aria-label="Shopping cart" aria-describedby="cartBadge">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+          </svg>
+          <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
+        </button>
       </div>
     </div>
   </header>
 
-  <main id="main">
-    <section class="hero">
+  <main id="main-content">
+    <!-- HERO -->
+    <section class="hero section">
       <div class="container hero-grid">
         <div class="hero-content">
-          <h1>Premium furniture for modern living</h1>
-          <p>Explore our curated selection of handcrafted pieces that bring comfort and style to any space.</p>
-          <a href="#products" class="btn primary hero-cta">Shop Now</a>
+          <h1 id="heroHeadline">Design Your Space. Define Your Comfort.</h1>
+          <p id="heroSubheadline">Premium furniture crafted for modern living.</p>
+          <a href="#" class="btn primary hero-cta" onclick="showShop()">Shop Now</a>
         </div>
         <div class="hero-image">
-          <img src="https://images.unsplash.com/photo-1598300050231-57c0f6be4cc5?auto=format&fit=crop&w=800&q=80" alt="Stylish furniture">
+          <img src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg" alt="Modern living room with premium furniture">
         </div>
       </div>
     </section>
 
-    <section id="products" class="section">
+    <!-- CATEGORIES -->
+    <section class="section categories" aria-labelledby="categories-title">
+      <h2 id="categories-title" class="section-header">Explore Collections</h2>
+      <div class="categories-grid">
+        <article class="category-card" role="button" tabindex="0" onclick="filterByCategory('Sofas')" aria-label="Sofas & Seating">
+          <img class="category-image" src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg" alt="Comfortable sofa set" loading="lazy">
+          <div class="category-info">
+            <h3 class="category-name">Sofas &amp; Seating</h3>
+            <p class="category-desc">Comfort meets elegance</p>
+            <a class="explore-link" href="#" onclick="event.preventDefault();">Explore &rarr;</a>
+          </div>
+        </article>
+        <article class="category-card" role="button" tabindex="0" onclick="filterByCategory('Beds')" aria-label="Beds">
+          <img class="category-image" src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg" alt="Luxury bed canopy" loading="lazy">
+          <div class="category-info">
+            <h3 class="category-name">Beds</h3>
+            <p class="category-desc">Ultimate luxury sleep</p>
+            <a class="explore-link" href="#" onclick="event.preventDefault();">Explore &rarr;</a>
+          </div>
+        </article>
+        <article class="category-card" role="button" tabindex="0" onclick="filterByCategory('Dining')" aria-label="Dining Tables">
+          <img class="category-image" src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg" alt="Elegant dining table" loading="lazy">
+          <div class="category-info">
+            <h3 class="category-name">Dining Tables</h3>
+            <p class="category-desc">Gather &amp; celebrate</p>
+            <a class="explore-link" href="#" onclick="event.preventDefault();">Explore &rarr;</a>
+          </div>
+        </article>
+        <article class="category-card" role="button" tabindex="0" onclick="filterByCategory('Office')" aria-label="Office Furniture">
+          <img class="category-image" src="https://images.pexels.com/photos/1633356/pexels-photo-1633356.jpeg" alt="Modern office setup" loading="lazy">
+          <div class="category-info">
+            <h3 class="category-name">Office Furniture</h3>
+            <p class="category-desc">Work in style</p>
+            <a class="explore-link" href="#" onclick="event.preventDefault();">Explore &rarr;</a>
+          </div>
+        </article>
+        <article class="category-card" role="button" tabindex="0" onclick="filterByCategory('Custom')" aria-label="Custom Designs">
+          <img class="category-image" src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg" alt="Custom furniture design" loading="lazy">
+          <div class="category-info">
+            <h3 class="category-name">Custom Designs</h3>
+            <p class="category-desc">Your vision realized</p>
+            <a class="explore-link" href="#" onclick="event.preventDefault();">Explore &rarr;</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section class="section featured-section" aria-labelledby="featured-title">
       <div class="container">
-        <header class="section-header"><h2>Featured Products</h2></header>
-        <div id="productGrid" class="product-grid"></div>
+        <h2 id="featured-title" class="section-header">Best Sellers</h2>
+        <div class="product-grid" id="featuredProducts"></div>
       </div>
     </section>
 
-    <section id="about" class="section">
-      <div class="container about-grid">
-        <div>
-          <h2>About Us</h2>
-          <p>Creative Furniture Solutions is dedicated to bringing you sustainable, high-quality furniture crafted by skilled artisans.</p>
-        </div>
-        <div>
-          <img src="https://images.unsplash.com/photo-1583803791058-80e99ebb1957?auto=format&fit=crop&w=600&q=80" alt="Workshop">
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="container contact-grid">
-        <div>
-          <h2>Stay in Touch</h2>
-          <form id="newsletterForm">
-            <div class="newsletter">
-              <input type="email" id="email" placeholder="Email address" required>
-              <button class="btn primary" type="submit">Subscribe</button>
+    <!-- WHY CHOOSE US -->
+    <section class="section why-choose" aria-labelledby="why-title">
+      <div class="container">
+        <h2 id="why-title" class="section-header">Why Choose Creative Furniture Solutions</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12" /></svg>
             </div>
-          </form>
+            <h3>Premium Quality</h3>
+            <p>Handcrafted with the finest materials and attention to detail.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" /><line x1="12" y1="6" x2="12" y2="12" /><line x1="12" y1="12" x2="15.5" y2="15.5" /></svg>
+            </div>
+            <h3>Durability</h3>
+            <p>Built to last for generations with our lifetime warranty.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3m0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" /></svg>
+            </div>
+            <h3>Customization</h3>
+            <p>Tailor every piece to match your unique style and space.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></svg>
+            </div>
+            <h3>Fast Delivery</h3>
+            <p>Free shipping on orders over $500. Express options available.</p>
+          </div>
         </div>
-        <div>
-          <h2>Contact</h2>
-          <p>1234 Main St<br>Anytown, USA<br><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <h2 id="testimonials-title" class="section-header">What Our Customers Say</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote class="testimonial-text">"The quality is unmatched. Every piece transformed my home into a luxury showroom."</blockquote>
+            <cite class="testimonial-author">— Sarah Mitchell</cite>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote class="testimonial-text">"Customer service was exceptional. They helped me find the perfect custom design."</blockquote>
+            <cite class="testimonial-author">— David Chen</cite>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote class="testimonial-text">"Worth every penny. The furniture is a masterpiece and built to last forever."</blockquote>
+            <cite class="testimonial-author">— Emma Rodriguez</cite>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="section newsletter" aria-labelledby="newsletter-title">
+      <div class="container newsletter-content">
+        <h2 id="newsletter-title">Stay Updated</h2>
+        <p>Subscribe to get exclusive offers and be the first to know about new collections.</p>
+        <form id="newsletterForm" class="newsletter-form">
+          <label for="email" class="sr-only">Email address</label>
+          <input id="email" type="email" placeholder="Enter your email" required>
+          <button type="submit" class="btn primary">Subscribe</button>
+        </form>
       </div>
     </section>
   </main>
 
+  <!-- SHOP PAGE (hidden until shown) -->
+  <section id="shop-page" class="shop-page" aria-hidden="true">
+    <div class="container">
+      <header class="shop-header">
+        <h1>Shop Our Collection</h1>
+        <p class="subtitle">Discover our curated selection of premium furniture.</p>
+      </header>
+      <div class="filters-container">
+        <div class="filter-group">
+          <label for="catFilter">Category</label>
+          <select id="catFilter" onchange="applyFilters()">
+            <option value="">All Categories</option>
+            <option value="Sofas">Sofas &amp; Seating</option>
+            <option value="Beds">Beds</option>
+            <option value="Dining">Dining Tables</option>
+            <option value="Office">Office Furniture</option>
+            <option value="Custom">Custom Designs</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="priceFilter">Price Range</label>
+          <select id="priceFilter" onchange="applyFilters()">
+            <option value="">All Prices</option>
+            <option value="0-1000">Under $1,000</option>
+            <option value="1000-3000">$1,000 - $3,000</option>
+            <option value="3000-5000">$3,000 - $5,000</option>
+            <option value="5000+">$5,000+</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="materialFilter">Material</label>
+          <select id="materialFilter" onchange="applyFilters()">
+            <option value="">All Materials</option>
+            <option value="Leather">Leather</option>
+            <option value="Fabric">Fabric</option>
+            <option value="Wood">Wood</option>
+            <option value="Metal">Metal</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="sortFilter">Sort By</label>
+          <select id="sortFilter" onchange="applyFilters()">
+            <option value="newest">Newest</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="popular">Most Popular</option>
+          </select>
+        </div>
+      </div>
+      <div class="product-grid" id="shopProducts"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT PAGE -->
+  <section id="about-page" class="section" aria-labelledby="about-title" style="display:none;">
+    <div class="container">
+      <h1 id="about-title">About Creative Furniture Solutions</h1>
+      <article class="about-grid">
+        <div>
+          <h2>Our Story</h2>
+          <p>Founded in 2015, Creative Furniture Solutions emerged from a passion for blending timeless craftsmanship with contemporary design. We believe every space tells a story, and our mission is to help you tell yours through thoughtfully designed, meticulously crafted furniture.</p>
+          <p>Our team of award-winning designers and master craftspeople collaborate to create pieces that transcend trends and become cherished heirlooms.</p>
+        </div>
+        <div class="about-values">
+          <div class="value-card">
+            <div class="value-icon">🌍</div>
+            <h3>Sustainable</h3>
+            <p>We source materials responsibly and commit to reducing our environmental footprint with every piece we create.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🎯</div>
+            <h3>Customer‑Centric</h3>
+            <p>Your satisfaction is our priority. Our dedicated team is here to support you at every step.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🏆</div>
+            <h3>Award‑Winning</h3>
+            <p>Recognized globally for design excellence and innovation in modern furniture.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONTACT PAGE -->
+  <section id="contact-page" class="section" aria-labelledby="contact-title" style="display:none;">
+    <div class="container">
+      <h1 id="contact-title">Get In Touch</h1>
+      <div class="contact-grid">
+        <div>
+          <h3>📞 Phone</h3>
+          <p>0748271235</p>
+        </div>
+        <div>
+          <h3>✉️ Email</h3>
+          <p><a href="mailto:hello@creativefurniture.com">hello@creativefurniture.com</a></p>
+        </div>
+        <div>
+          <h3>📍 Location</h3>
+          <p>123 Design Street, New York, NY 10001</p>
+        </div>
+        <div>
+          <h3>🕐 Hours</h3>
+          <p>Mon–Fri: 9 AM – 6 PM<br>Sat: 10 AM – 4 PM<br>Sun: Closed</p>
+        </div>
+      </div>
+      <section class="contact-form">
+        <h2>Send us a Message</h2>
+        <form onsubmit="handleContactForm(event)" class="contact-form-grid">
+          <label for="contactName" class="sr-only">Your Name</label>
+          <input id="contactName" type="text" placeholder="Your Name" required>
+          <label for="contactEmail" class="sr-only">Your Email</label>
+          <input id="contactEmail" type="email" placeholder="Your Email" required>
+          <label for="contactMessage" class="sr-only">Your Message</label>
+          <textarea id="contactMessage" placeholder="Your Message" rows="5" required></textarea>
+          <button type="submit" class="btn primary">Send Message</button>
+        </form>
+      </section>
+      <div class="contact-chat">
+        <h3>💬 Quick Chat</h3>
+        <p>For urgent inquiries, message us on WhatsApp: <a href="https://wa.me/0748271235">0748271235</a></p>
+      </div>
+    </div>
+  </section>
+
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div>&copy; <span id="year"></span> Creative Furniture Solutions</div>
-      <div><a href="#privacy">Privacy Policy</a></div>
+      <div class="footer-section">
+        <h4>Creative Furniture Solutions</h4>
+        <p>Crafting luxury furniture for modern living since 2015.</p>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">📷</a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X">𝕏</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#" onclick="showHome(event)">Home</a></li>
+          <li><a href="#" onclick="showShop(event)">Shop</a></li>
+          <li><a href="#" onclick="showAbout(event)">About</a></li>
+          <li><a href="#" onclick="showContact(event)">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="#" onclick="event.preventDefault();">Shipping Info</a></li>
+          <li><a href="#" onclick="event.preventDefault();">Returns</a></li>
+          <li><a href="#" onclick="event.preventDefault();">FAQ</a></li>
+          <li><a href="#" onclick="event.preventDefault();">Track Order</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="#" onclick="event.preventDefault();">Privacy Policy</a></li>
+          <li><a href="#" onclick="event.preventDefault();">Terms &amp; Conditions</a></li>
+          <li><a href="#" onclick="event.preventDefault();">Warranty</a></li>
+          <li><a href="#" onclick="event.preventDefault();">Shipping Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Creative Furniture Solutions. All rights reserved. | Designed with ✨ for luxury living.</p>
     </div>
   </footer>
 
-  <div id="productModal" class="modal" aria-hidden="true">
-    <div class="modal-panel" id="modalContent"></div>
-    <button id="modalClose" class="modal-close" aria-label="Close">&times;</button>
+  <!-- CART SIDEBAR -->
+  <aside class="cart-sidebar" id="cartSidebar" aria-hidden="true">
+    <div class="cart-header">
+      <h2>Shopping Cart</h2>
+      <button class="close-cart" onclick="toggleCart()" aria-label="Close cart">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="empty-cart">🛒 Your cart is empty</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Total:</span> <span id="cartTotal">$0.00</span></div>
+      <button class="checkout-btn" onclick="handleCheckout()">Proceed to Checkout</button>
+    </div>
+  </aside>
+
+  <!-- PRODUCT DETAIL MODAL -->
+  <div id="productModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-panel">
+      <button id="modalClose" class="modal-close" aria-label="Close">&times;</button>
+      <div id="modalContent"></div>
+    </div>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
